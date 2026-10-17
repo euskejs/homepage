@@ -23,15 +23,15 @@ npm start
 
 ## Content and assets
 
-Edit `src/data/site.ts` for biography, career history, focus areas, navigation, contact links, and page copy. Styling is in `src/app/globals.css`. The homepage intentionally contains only the hero and compact career/focus area.
+Edit `src/data/site.ts` for biography, career history, focus areas, contact links, and page copy. Styling is in `src/app/globals.css`. The homepage contains the hero, compact career/focus area, and AI Twin chat at the bottom. The header shows the name only; the footer keeps contact icons. The hero CTA scrolls to `#ai-twin`.
 
 - The portrait at `public/kejia-portrait.png` is prepared from the upper portion of the user-supplied `background.png` using AI-assisted checkerboard removal. `site.portrait` selects the asset.
 - Email and LinkedIn are configured in the data module and appear on Contact and in the footer. GitHub remains unconfigured and omitted. Approved public contact details are also included in the AI Twin context.
-- Company names use text labels, not unapproved logos.
+- The homepage career timeline uses locally stored company logos requested by Kejia. Sources and asset details are recorded in `docs/company-logos.md`; the Experience page retains text headings.
 - The active skyline comes from the lower portion (rows 585–1023) of the user-supplied `background.png`, preserved as `public/background.png` and cropped in CSS. Its original colors are unchanged. The earlier Wikimedia substitute is no longer displayed. The supplied asset’s source/license was not independently verified.
 - The supplied reference is not rendered as the website and is not asserted to be rights-cleared for publication. Remove both reference files from any public release if you do not have permission to redistribute them; keeping the root copy privately is sufficient for future comparisons.
 
-Routes: `/`, `/about`, `/experience`, `/innovation`, `/ai-twin`, `/contact`, `/credits`; also sitemap, robots, favicon, and a custom 404.
+Routes: `/` (including AI Twin), `/about`, `/experience`, `/innovation`, `/contact`, `/credits`; also sitemap, robots, favicon, and a custom 404. Supporting pages remain accessible directly, without header/footer navigation. `/ai-twin` redirects to `/#ai-twin` for existing bookmarks.
 
 ## AI Twin configuration
 
@@ -49,8 +49,8 @@ The endpoint validates alternating user/assistant turns, rejects system-role inj
 
 1. Clone `https://github.com/euskejs/homepage.git`, or work in the existing checkout. Keep `.env*` (except `.env.example`) out of Git. Commit changes and push to the repository.
 2. Import the repository into Vercel. Select the Next.js framework, repository root directory, Node.js 24, install command `npm ci`, and build command `npm run build`. Leave the output directory at the framework default.
-3. Set `OPENAI_API_KEY` and optionally `OPENAI_MODEL` for the built-in chat, or `AI_TWIN_URL` for the external fallback. Redeploy after environment changes. The AI Twin page is rendered dynamically.
-4. Review the generated Vercel preview URL: desktop/mobile navigation, every route, image loading, chat send/reply, error recovery, and New chat, and keyboard focus. Review the supplied imagery and missing contact details before public launch.
+3. Set `OPENAI_API_KEY` and optionally `OPENAI_MODEL` for the built-in chat, or `AI_TWIN_URL` for the external fallback. Redeploy after environment changes. The homepage is rendered dynamically to select the AI Twin connection mode.
+4. Review the generated Vercel preview URL: desktop/mobile layout, the hero chat link, every route, image loading, chat send/reply, error recovery, and New chat, and keyboard focus. Review the supplied imagery and missing contact details before public launch.
 5. Promote the reviewed deployment and then follow the separate [Route 53 cutover and rollback guide](docs/dns-cutover.md).
 
 The source repository is [euskejs/homepage](https://github.com/euskejs/homepage). Vercel deployment and DNS cutover are separate steps; hosting requires your account and project selection. See [Vercel’s Next.js documentation](https://vercel.com/docs/frameworks/full-stack/nextjs).
@@ -59,7 +59,7 @@ The source repository is [euskejs/homepage](https://github.com/euskejs/homepage)
 
 The installed ESLint dependency chain reports a high-severity `braces` advisory affecting glob patterns in development tooling. The registry currently proposes a breaking downgrade of Next's ESLint configuration, not an appropriate runtime fix. Do not run `npm audit fix --force` blindly. Production dependencies are checked separately with `npm audit --omit=dev`. Update the tooling when an upstream compatible fix is available.
 
-Verified locally: lint, TypeScript, production build, all intended routes (HTTP 200), unknown route (404), desktop viewport at 1536×1024, mobile layout at 390×844 without horizontal overflow, mobile menu navigation, and disabled AI Twin preview. The browser extension injected an HTML attribute and caused a development-only hydration warning; its attribute was not generated by the site. Production dependency audit: zero reported vulnerabilities at verification time.
+Verified locally: lint, TypeScript, production build, content routes (HTTP 200), the legacy AI Twin redirect, unknown route (404), desktop viewport at 1536×1024, mobile layout at 390×844 without horizontal overflow, homepage chat navigation, and disabled AI Twin preview. The browser extension injected an HTML attribute and caused a development-only hydration warning; its attribute was not generated by the site. Production dependency audit: zero reported vulnerabilities at verification time.
 
 AI Twin integration verification: live career summary and confidential-information refusal returned successfully; browser suggestion-to-answer flow and New chat worked; malformed history, system-role injection, oversized questions, and cross-origin calls were rejected. Lint, typecheck, and production build passed. The configured API key was not found in generated client assets. These representative checks do not guarantee every model response is accurate.
 
