@@ -2,7 +2,7 @@ export const site = {
   name: 'Kejia Shi',
   role: 'Global Telecom & Technology Strategist',
   url: 'https://kejiashi.info',
-  eyebrow: 'TELECOM · TECHNOLOGY · PEOPLE · IMPACT',
+  eyebrow: 'TECHNOLOGY · PEOPLE · IMPACT',
   headline: 'Innovation with Purpose and Impact',
   bio: 'Nearly three decades of experience across global telecom vendors and network operators, focused on turning emerging technologies into practical solutions that create business value and improve everyday life.',
   cta: 'Chat with My AI Twin',
