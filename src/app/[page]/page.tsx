@@ -1,0 +1,8 @@
+import { notFound } from 'next/navigation';
+import { site } from '@/data/site';
+import { Career, Focus } from '@/components/content';
+const slugs = ['about','experience','innovation','contact'] as const;
+type Slug = typeof slugs[number];
+export function generateStaticParams(){return slugs.map(page=>({page}));}
+export async function generateMetadata({params}:{params:Promise<{page:string}>}){const {page}=await params;return {title:page.charAt(0).toUpperCase()+page.slice(1),alternates:{canonical:`/${page}`}};}
+export default async function Page({params}:{params:Promise<{page:string}>}) { const {page}=await params;if(!slugs.includes(page as Slug))notFound();const content=site.pages[page as Slug];return <main id="main" className="container inner-page"><p className="eyebrow">{content.eyebrow}</p><h1>{content.title}</h1>{page==='about'&&<div className="prose"><p className="lead">{site.pages.about.intro}</p><p>{site.bio}</p><h2>{site.careerHeading}</h2><p>{site.careerIntro}</p><Career expanded/></div>}{page==='experience'&&<><p className="lead">{site.careerIntro}</p><Career expanded/></>}{page==='innovation'&&<><p className="lead">{site.focusIntro}</p><div className="innovation-focus"><Focus/></div></>}{page==='contact'&&<div className="prose"><p className="lead">{site.pages.contact.intro}</p><div className="contact-links">{site.email&&<a className="button" href={`mailto:${site.email}`}>{site.email}</a>}{site.socials.linkedin&&<a className="contact-linkedin" href={site.socials.linkedin}>Connect on LinkedIn ↗</a>}{!site.email&&!site.socials.linkedin&&<p className="notice">{site.pages.contact.pending}</p>}</div></div>}</main>;}

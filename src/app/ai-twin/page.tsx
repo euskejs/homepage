@@ -1,0 +1,7 @@
+import { MessageCircle, ArrowUpRight } from 'lucide-react';
+import { TwinChat } from '@/components/twin-chat';
+import { site } from '@/data/site';
+export const dynamic = 'force-dynamic';
+export const metadata = { title:'AI Twin',alternates:{canonical:'/ai-twin'} };
+function twinUrl(){try{const url=new URL(process.env.AI_TWIN_URL||'');return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null;}}
+export default function Twin(){const url=twinUrl();const connected=Boolean(process.env.OPENAI_API_KEY?.trim());return <main id="main" className={`container inner-page twin-page${connected ? " twin-page-live" : ""}`}><p className="eyebrow">{site.twin.eyebrow}</p><h1>{site.twin.title}</h1><p className="lead">{site.twin.description}</p>{connected ? <TwinChat/> : <section className="twin-panel"><MessageCircle size={42} strokeWidth={1.3} aria-hidden="true"/>{url?<><p>{site.twin.disclosure}</p><a className="button" href={url} target="_blank" rel="noopener noreferrer">{site.twin.open}<ArrowUpRight size={19}/></a></>:<><span className="status">{site.twin.preview}</span><h2>{site.twin.previewTitle}</h2><p>{site.twin.previewDescription}</p><label className="sr-only" htmlFor="chat-preview">{site.twin.input}</label><input id="chat-preview" disabled placeholder={site.twin.input}/><details><summary>Integration instructions</summary><p>{site.twin.integration}</p><p>{site.twin.disclosure}</p></details></>}</section>}</main>;}
