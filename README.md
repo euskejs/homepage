@@ -25,7 +25,7 @@ npm start
 
 Edit `src/data/site.ts` for biography, career history, focus areas, contact links, and page copy. Styling is in `src/app/globals.css`. The homepage contains the hero, compact career/focus area, and AI Twin chat at the bottom. The header shows the name only; the footer keeps contact icons. The hero CTA scrolls to `#ai-twin`.
 
-- The portrait at `public/kejia-portrait.png` is prepared from the upper portion of the user-supplied `background.png` using AI-assisted checkerboard removal. `site.portrait` selects the asset.
+- The portrait at `public/portrait-1-transparent.png` is prepared from the user-supplied `public/portrait-1.jpeg` using AI-assisted background removal. The original JPEG is preserved. `site.portrait` selects the asset.
 - Email and LinkedIn are configured in the data module and appear on Contact and in the footer. GitHub remains unconfigured and omitted. Approved public contact details are also included in the AI Twin context.
 - The homepage career timeline uses locally stored company logos requested by Kejia. Sources and asset details are recorded in `docs/company-logos.md`; the Experience page retains text headings.
 - The active skyline comes from the lower portion (rows 585–1023) of the user-supplied `background.png`, preserved as `public/background.png` and cropped in CSS. Its original colors are unchanged. The earlier Wikimedia substitute is no longer displayed. The supplied asset’s source/license was not independently verified.

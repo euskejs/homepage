@@ -6,7 +6,7 @@ export const site = {
   headline: 'Innovation with Purpose and Impact',
   bio: 'Nearly three decades of experience across global telecom vendors and network operators, focused on turning emerging technologies into practical solutions that create business value and improve everyday life.',
   cta: 'Chat with My AI Twin',
-  portrait: '/kejia-portrait.png' as string | null,
+  portrait: '/portrait-1-transparent.png' as string | null,
   skyline: '/background.png',
   portraitPlaceholder: 'Portrait placeholder · original photo pending',
   email: 'kejia.shi@gmail.com' as string | null,
@@ -14,7 +14,7 @@ export const site = {
   careerHeading: 'Career Journey',
   careerIntro: 'From technology development to product strategy and network deployment.',
   career: [
-    {company:'Ericsson', logo:{src:'/logos/ericsson.svg', width:219, height:49}, years:'1997–2015', description:'Software development, solution architecture, and presales.'},
+    {company:'Ericsson', logo:{src:'/logos/ericsson.svg', width:219, height:49}, years:'1997–2015', description:'Software development, solution architecture, and product management.'},
     {company:'Huawei', logo:{src:'/logos/huawei.png', width:266, height:60}, years:'2015–2018', description:'5G product strategy and global business.'},
     {company:'Reliance Jio', logo:{src:'/logos/jio.png', width:200, height:200}, years:'2018–2019', description:'CTO office, network strategy and innovation.'},
     {company:'Verizon', logo:{src:'/logos/verizon.svg', width:500, height:112}, years:'2019–Present', description:'6G strategy, AI innovation and ecosystem partnerships.'},
